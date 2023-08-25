@@ -9,9 +9,7 @@ class PurchaseOrder(models.Model):
 
     _inherit = "purchase.order"
 
-    account_payment_ids = fields.Many2many(
-        "account.payment", string="Pay purchase advanced", readonly=True
-    )
+    account_payment_ids = fields.Many2many("account.payment", string="Pay purchase advanced", readonly=True)
     amount_residual = fields.Float(
         "Residual amount",
         readonly=True,
@@ -36,9 +34,7 @@ class PurchaseOrder(models.Model):
         tracking=True,
         compute="_compute_purchase_advance_payment",
     )
-    payments_date = fields.Char(
-        help="All dates of payments related to this order", compute="_compute_payments_date"
-    )
+    payments_date = fields.Char(help="All dates of payments related to this order", compute="_compute_payments_date")
 
     @api.depends(
         "currency_id",
@@ -89,10 +85,8 @@ class PurchaseOrder(models.Model):
                 invoice_paid_amount += inv.amount_total - inv.amount_residual
             amount_residual = order.amount_total - advance_amount - invoice_paid_amount
             payment_state = "not_paid"
-            if mls or order.invoice_ids:
-                has_due_amount = float_compare(
-                    amount_residual, 0.0, precision_rounding=order.currency_id.rounding
-                )
+            if (mls or order.invoice_ids) and order.account_payment_ids:
+                has_due_amount = float_compare(amount_residual, 0.0, precision_rounding=order.currency_id.rounding)
                 if has_due_amount <= 0:
                     payment_state = "paid"
                 elif has_due_amount > 0:
