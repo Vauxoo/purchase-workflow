@@ -5,7 +5,9 @@ class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
 
     def _create_payments(self):
-        """Inherited method to relate payments automatically when generate payments from an account.move"""
+        """Inherited method to relate payments automatically when
+        generate payments from an account.move
+        """
         payments = super()._create_payments()
         active_ids = self.env.context.get("active_ids", [])
         if (
