@@ -15,7 +15,10 @@
                 />
             </button>
             <notebook position="inside">
-                <page string="Payment advances" groups="purchase_advance_payment.group_purchase_payments, purchase.group_purchase_manager">
+                <page
+                    string="Payment advances"
+                    groups="purchase_advance_payment.group_purchase_payments, purchase.group_purchase_manager"
+                >
                     <field
                         name="account_payment_ids"
                         nolabel="1"
