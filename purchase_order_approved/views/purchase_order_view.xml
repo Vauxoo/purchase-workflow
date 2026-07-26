@@ -28,7 +28,7 @@
             <field name="order_line" position="attributes">
                 <attribute
                     name="readonly"
-                >state in ['purchase', 'done', 'cancel', 'approved']</attribute>
+                >state in ['done', 'cancel', 'approved']</attribute>
             </field>
             <field name="origin" position="attributes">
                 <attribute
